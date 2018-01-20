@@ -1,0 +1,11 @@
+Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen https://fullstack-exampleapp.herokuapp.com/spa eli muistiinpanojen single page app-versioon
+
+käyttäjä->selain: Mene https://fullstack-exampleapp.herokuapp.com/spa
+selain->palvelin: GET f https://fullstack-exampleapp.herokuapp.com/spa
+palvelin->selain: 200: Response-Body: HTML-sivu
+selain->palvelin: GET f https://fullstack-exampleapp.herokuapp.com/spa.js
+palvelin->selain: 200: Response-Body: JS-koodia
+note left of selain: selain suorittaa js-koodin
+selain->palvelin: GET /data.json
+palvelin->selain: 200: Palvelin palauttaa JSON sivun
+selain->käyttäjä: piirtää kommentit ja formin

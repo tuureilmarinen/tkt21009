@@ -1,0 +1,8 @@
+# Task 0.3
+käyttäjä->selain: Mene fullstack-exampleapp.herokuapp.com/notes
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+palvelin->selain: 200: Response-Body: js-skripti
+note left of selain: selain suorittaa javascriptin
+selain->palvelin: GET /data.json
+palvelin<-selain: 200: Palvelin palauttaa kommentit tietokannasta
+selain->käyttäjä: selain piirtää kommentit näytölle
