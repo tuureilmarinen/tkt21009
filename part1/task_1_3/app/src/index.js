@@ -19,30 +19,32 @@ const Osa = (params) => {
 }
 const Yhteensa = (params) => {
   return (
-    <p>yhteensä {params.count} tehtävää</p>
+    <p>yhteensä {params.osat[0].tehtavia+params.osat[1].tehtavia+params.osat[2].tehtavia} tehtävää</p>
   )
 }
 
 const App = () => {
   const kurssi = 'Half Stack -sovelluskehitys'
-  const osa1 = {
-    nimi: 'Reactin perusteet',
-    tehtavia: 10
-  }
-  const osa2 = {
-    nimi: 'Tiedonvälitys propseilla',
-    tehtavia: 7
-  }
-  const osa3 = {
-    nimi: 'Komponenttien tila',
-    tehtavia: 14
-  }
+  const osat = [
+    {
+      nimi: 'Reactin perusteet',
+      tehtavia: 10
+    },
+    {
+      nimi: 'Tiedonvälitys propseilla',
+      tehtavia: 7
+    },
+    {
+      nimi: 'Komponenttien tila',
+      tehtavia: 14
+    }
+  ]
 
   return (
     <div>
       <Otsikko kurssi={kurssi} />
-      <Sisalto osat={[osa1,osa2,osa3]} />
-      <Yhteensa count={osa1.tehtavia+osa2.tehtavia+osa3.tehtavia} />
+      <Sisalto osat={osat} />
+      <Yhteensa osat={osat}/>
     </div>
   )
 }
