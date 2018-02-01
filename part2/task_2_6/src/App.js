@@ -1,5 +1,6 @@
 import React from 'react';
-import Person from './components/Person'
+import PersonAddingForm from './components/PersonAddingForm'
+import Persons from './components/Persons'
 
 class App extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class App extends React.Component {
   }
 
   render() {
-    const persons = this.state.persons.filter((p)=>p.name.toLowerCase().includes(this.state.searchField.toLowerCase()))
     return (
       <div>
         <div>
@@ -47,28 +47,14 @@ class App extends React.Component {
             onChange={this.handleSearchFieldChange}
           />
         </div>
+        <PersonAddingForm
+          onSubmit={this.addPerson}
+          numberValue={this.state.newNumber}
+          nameValue={this.state.newName}
+          numberOnChange={this.handleNumberChange}
+          nameOnChange={this.handleNameChange} />
         <h2>Puhelinluettelo</h2>
-        <form onSubmit={this.addPerson}>
-          <div>
-            nimi:
-            <input
-              value={this.state.newName}
-              onChange={this.handleNameChange}
-            />
-          </div>
-          <div>
-            puh:
-            <input
-              value={this.state.newNumber}
-              onChange={this.handleNumberChange}
-            />
-          </div>
-          <div>
-            <button type="submit">lisää</button>
-          </div>
-        </form>
-        <h2>Numerot</h2>
-        {persons.map((person)=><Person person={person}/>)}
+        <Persons persons={this.state.persons} filter={this.state.searchField} />
       </div>
     )
   }
