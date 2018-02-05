@@ -21,12 +21,35 @@ class App extends Component {
       })
   }
   handleSearchFieldChange = (e) => {
-    this.setState({searchField: e.target.value})
+    const countries = this.state.allCountries.filter((c)=>c.name.toLowerCase().includes(this.state.searchField.toLowerCase()))
+    const countryToShow = countries.length==1 ? countries[0] : null
+    this.setState({countryToShow,searchField: e.target.value})
+  }
+  handleCountryClick = (c) => {
+    return ()=>{
+      console.log(c)
+      this.setState({countryToShow:c})
+    }
   }
 
   render = () => {
     const countries = this.state.allCountries.filter((c)=>c.name.toLowerCase().includes(this.state.searchField.toLowerCase()))
-    if(countries.length>10){
+    if (this.state.countryToShow) {
+      const country=countries[0]
+      return (
+        <div>
+        <input
+          value={this.state.searchField}
+          onChange={this.handleSearchFieldChange}
+        />
+        <h1>{country.name} </h1>
+        <b>Capital:</b> {country.capital}<br/>
+        <b>Population:</b> {country.population}<br/>
+        <img src={country.flag} />
+        </div>
+      )
+    }
+    else if(countries.length>10){
       return (
         <div>
         <input
@@ -44,20 +67,6 @@ class App extends Component {
         />
         no matches</div>
       )
-    } else if (countries.length===1) {
-      const country=countries[0]
-      return (
-        <div>
-        <input
-          value={this.state.searchField}
-          onChange={this.handleSearchFieldChange}
-        />
-        <h1>{country.name} </h1>
-        <b>Capital:</b> {country.capital}<br/>
-        <b>Population:</b> {country.population}<br/>
-        <img src={country.flag} />
-        </div>
-      )
     } else { // more than one matches
       return(
         <div>
@@ -66,7 +75,7 @@ class App extends Component {
             onChange={this.handleSearchFieldChange}
           />
           <ul>
-            {countries.map((c)=><li key={c.id}>{c.name}</li>)}
+            {countries.map((c)=><li onClick={this.handleCountryClick({c})} key={c.id}>{c.name}</li>)}
           </ul>
         </div>
       );
