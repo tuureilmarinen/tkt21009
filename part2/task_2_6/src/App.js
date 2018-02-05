@@ -1,14 +1,13 @@
 import React from 'react';
 import PersonAddingForm from './components/PersonAddingForm'
 import Persons from './components/Persons'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        { name: 'Arto Hellas', id:1, number:'+1-212-555-609'}
-      ],
+      persons: [],
       newName: 'new name',
       newNumber: 'new number',
       searchField: ''
@@ -35,6 +34,15 @@ class App extends React.Component {
   }
   handleNumberChange = (e) => {
     this.setState({newNumber: e.target.value})
+  }
+  componentWillMount() {
+  axios
+    .get('http://localhost:3001/persons')
+    .then(response => {
+      console.log('promise fulfilled')
+      //debugger
+      this.setState({persons:response.data})
+    })
   }
 
   render() {
