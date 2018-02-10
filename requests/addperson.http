@@ -1,4 +1,4 @@
-DELETE http://localhost:3001/api/persons/1
+POST http://localhost:3001/api/persons
 Content-Type: Application/JSON
 
-{"name":"UUSI","number":"040-123443256"}
+{"name":"UUSI2222","number":"040-123443256"}
