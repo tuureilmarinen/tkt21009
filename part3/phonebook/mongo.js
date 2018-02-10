@@ -7,25 +7,25 @@ const url = 'mongodb://user1:Fr9mtuRkK4XJqqjT@ds127888.mlab.com:27888/bananaphon
 
 mongoose.connect(url)
 
-const params = process.argv.slice(2);
+const params = process.argv.slice(2)
 //debugger
 
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String
-  })
-  
-const Person = mongoose.model('Person', personSchema);
+	name: String,
+	number: String
+})
+
+const Person = mongoose.model('Person', personSchema)
 const person = new Person({
-    name: params[0],
-    number: params[1]
+	name: params[0],
+	number: params[1]
 })
 person
-  .save()
-  .then(response => {
-    console.log(`lisättiin henkilö ${person.name} numero ${person.number} luetteloon`)
-    mongoose.connection.close()
-  }).catch(response => {
-    console.log('epic fail')
-    console.log(response)
-  })
+	.save()
+	.then(response => {
+		console.log(`lisättiin henkilö ${person.name} numero ${person.number} luetteloon`)
+		mongoose.connection.close()
+	}).catch(response => {
+		console.log('epic fail')
+		console.log(response)
+	})
