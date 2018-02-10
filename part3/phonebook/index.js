@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-var morgan = require('morgan')
+const morgan = require('morgan')
+const cors = require('cors')
+
+app.use(cors())
 
   let persons= [
     {
@@ -25,9 +28,13 @@ var morgan = require('morgan')
       "id": 4
     }
   ]
-  
-  app.use(morgan('tiny'))
+
+  //app.use(morgan('tiny'))
   app.use(bodyParser.json())
+  morgan.token('req-content', function (req, res) { return JSON.stringify(req.body) })
+  app.use(morgan(':method :url :status :req-content :res[content-length] - :response-time ms'))
+
+  app.use(express.static('build'))
 
   app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>')
@@ -77,7 +84,7 @@ var morgan = require('morgan')
     response.status(404).send({error: 'unknown endpoint'})
   })
   
-  const PORT = 3001
+  const PORT = process.env.PORT || 3001
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })
