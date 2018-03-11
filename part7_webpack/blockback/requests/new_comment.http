@@ -1,0 +1,6 @@
+POST http://localhost:3003/api/blogs/5aa39cbe9b330725bc2c222b/comments
+content-type: application/json
+
+{
+  "content": "Uusi kommentti"
+}
